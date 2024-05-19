@@ -1,0 +1,16 @@
+{
+  "blogs": [
+    {
+      "id": "f66e",
+      "title": "Controlled Component",
+      "content": "lorem ipsum dolor sit amet consectetur",
+      "author": "Rahman Ilyas"
+    },
+    {
+      "id": "bf67",
+      "title": "Submit Event",
+      "content": "lorem ipsum dolor sit amet consectetur",
+      "author": "Syahrul"
+    }
+  ]
+}
