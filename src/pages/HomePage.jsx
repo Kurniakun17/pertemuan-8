@@ -5,7 +5,32 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const [blogs, setBlogs] = useState([]);
 
+  async function fetchData() {
+    const response = await fetch("http://localhost:8000/blogs");
+    const data = await response.json();
+
+    setBlogs(data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`http://localhost:8000/blogs/${id}`, {
+      method: "DELETE",
+    });
+
+    const result = await response.json();
+
+    console.log(result)
+
+    if (response.ok) {
+      fetchData();
+    }
+  };
 
   return (
     <div className="text-white min-h-screen bg-zinc-800 pt-28">
@@ -28,8 +53,13 @@ const HomePage = () => {
             >
               <div className="flex justify-between">
                 <h2 className="text-xl font-bold mb-2">{blog.title}</h2>
-                <button>
-                  <Trash className="hover:cursor-pointer hover:text-red-500 duration-200" />
+                <button
+                  className="hover:cursor-pointer"
+                  onClick={() => {
+                    handleDelete(blog.id);
+                  }}
+                >
+                  <Trash className=" hover:text-red-500 duration-200" />
                 </button>
               </div>
               <p>{blog.content}</p>
